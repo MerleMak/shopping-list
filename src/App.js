@@ -1,4 +1,5 @@
 import { initialItems } from "./db.js";
+import { useState } from "react";
 
 import AddItem from "./components/AddItem.js";
 import ListItem from "./components/ListItem.js";
@@ -6,13 +7,19 @@ import ListItem from "./components/ListItem.js";
 import "./components/Listbody.css";
 
 function App() {
+  const [items, setItems] = useState(initialItems);
+
+  function handleonDelete(itemId) {
+    setItems;
+  }
+
   return (
     <main className="Listbody">
       <header> Merle's shopping list</header>
-      <AddItem />
       <ul>
-        <ListItem ListItems={initialItems} />
+        <ListItem items={items} />
       </ul>
+      <AddItem />
     </main>
   );
 }
