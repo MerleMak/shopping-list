@@ -1,3 +1,8 @@
 .ListItem {
-  border: darkgoldenrod 2px solid;
+  font-size: 0.8rem;
+  list-style: none;
+  padding: 5px 10px;
+  background-color: #246a73;
+  border: #368f8b 1px solid;
+  border-radius: 25px;
 }

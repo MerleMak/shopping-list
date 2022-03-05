@@ -1,3 +1,4 @@
+import "./AddItem.css";
 import { useState } from "react";
 
 export default function AddItem({ onAddItem }) {
@@ -9,9 +10,12 @@ export default function AddItem({ onAddItem }) {
     setName("");
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="new-item">What do you want to buy?</label>
+    <form className="AddItem__form" onSubmit={handleSubmit}>
+      <label className="AddItem__label" htmlFor="new-item">
+        What do you want to buy?
+      </label>
       <input
+        className="AddItem__input"
         type="text"
         id="new-item"
         placeholder="Add item"
@@ -19,11 +23,13 @@ export default function AddItem({ onAddItem }) {
         onChange={(event) => setName(event.target.value)}
       />
       <button
-      //onClick={() => {
-      //  setName("");
-      //  onAddItem(name);}}
+        className="AddItem__button"
+        //onClick={() => {
+        //  setName("");
+        //  onAddItem(name);}}
+        // --> changes functionalities into form and handleSubmit function
       >
-        Add to list
+        Add
       </button>
     </form>
   );

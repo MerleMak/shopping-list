@@ -1,0 +1,30 @@
+.AddItem__form {
+  margin-top: 30px;
+}
+
+.AddItem__label {
+  font-size: 1.3rem;
+}
+
+.AddItem__input {
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 7px 10px;
+  width: 50vw;
+  background-color: #ddbea8;
+  border: #246a73 1px solid;
+  border-radius: 25px;
+}
+
+.AddItem__button {
+  padding: 5px 10px;
+  color: #f3dfc1;
+  background-color: #246a73;
+  border: #368f8b 1px solid;
+  border-radius: 25px;
+  font-family: "Merienda", cursive;
+}
+
+::placeholder {
+  font-family: "Merienda", cursive;
+}

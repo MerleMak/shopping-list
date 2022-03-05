@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import { nanoid } from "nanoid";
 import { initialItems } from "./db.js";
 import { useState } from "react";
@@ -5,21 +6,19 @@ import { useState } from "react";
 import AddItem from "./components/AddItem.js";
 import ListItem from "./components/ListItem.js";
 
-import "./components/Listbody.css";
-
-let nextID = 1;
+import "./App.css";
 
 export default function App() {
   const [items, setItems] = useState(initialItems);
 
-  function handleAddItem(title) {
+  function handleAddItem(name) {
     setItems([
       ...items,
       {
         _id: nanoid(),
         _type: "shopping.item",
         category: { _type: "ref", _ref: "c2hvcHBpbmcuY2F0ZWdvcnk6MA==" },
-        name: { en: title, de: "" },
+        name: { en: name, de: "" },
       },
     ]);
   }
@@ -29,13 +28,20 @@ export default function App() {
   }
 
   return (
-    <main className="Listbody">
-      <header> Merle's shopping list</header>
-      <ul>
+    <main className="list__body">
+      <header className="list__header">shopping list</header>
+      <ul role="list" className="list">
         {items.map((item) => (
-          <ListItem onDelete={handleonDelete} key={item._id} item={item} />
+          <ListItem
+            ariaLabel="click to delete Item"
+            onDelete={handleonDelete}
+            key={item._id}
+            item={item}
+          />
         ))}
       </ul>
+      <p className="list__info">-click item to delete-</p>
+      <hr className="list__divider"></hr>
       <AddItem onAddItem={handleAddItem} />
     </main>
   );
