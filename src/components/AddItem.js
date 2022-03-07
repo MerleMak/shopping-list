@@ -1,7 +1,7 @@
 import "./AddItem.css";
 import { useState } from "react";
 
-export default function AddItem({ onAddItem }) {
+export default function AddItem({ onInput, onAddItem }) {
   const [name, setName] = useState("");
 
   function handleSubmit(event) {
@@ -9,6 +9,12 @@ export default function AddItem({ onAddItem }) {
     onAddItem(name);
     setName("");
   }
+
+  function handleChange(event) {
+    setName(event.target.value);
+    onInput(event.target.value);
+  }
+
   return (
     <form className="AddItem__form" onSubmit={handleSubmit}>
       <label className="AddItem__label" htmlFor="new-item">
@@ -20,7 +26,7 @@ export default function AddItem({ onAddItem }) {
         id="new-item"
         placeholder="Add item"
         value={name}
-        onChange={(event) => setName(event.target.value)}
+        onChange={handleChange}
       />
       <button
         className="AddItem__button"
