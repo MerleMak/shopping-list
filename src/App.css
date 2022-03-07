@@ -28,5 +28,14 @@
 }
 
 .list__divider {
-  border: ##f3dfc1 solid 1px;
+  border: #f3dfc1 solid 1px;
+}
+
+.ApiList {
+  font-family: "Merienda", cursive;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
 }

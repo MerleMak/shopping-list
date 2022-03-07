@@ -1,14 +1,8 @@
 import "./AddItem.css";
 import { useState } from "react";
 
-export default function AddItem({ onSearch, onAddItem }) {
+export default function AddItem({ onInput, onAddItem }) {
   const [name, setName] = useState("");
-
-  function handleSearch(event) {
-    event.preventDefault();
-    onSearch(name);
-    setName("");
-  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -16,12 +10,13 @@ export default function AddItem({ onSearch, onAddItem }) {
     setName("");
   }
 
+  function handleChange(event) {
+    setName(event.target.value);
+    onInput(event.target.value);
+  }
+
   return (
-    <form
-      className="AddItem__form"
-      onChange={handleSearch}
-      onSubmit={handleSubmit}
-    >
+    <form className="AddItem__form" onSubmit={handleSubmit}>
       <label className="AddItem__label" htmlFor="new-item">
         What do you want to buy?
       </label>
@@ -31,7 +26,7 @@ export default function AddItem({ onSearch, onAddItem }) {
         id="new-item"
         placeholder="Add item"
         value={name}
-        onChange={(event) => setName(event.target.value)}
+        onChange={handleChange}
       />
       <button
         className="AddItem__button"

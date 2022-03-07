@@ -5,12 +5,15 @@ import { useState, useEffect } from "react";
 import AddItem from "./components/AddItem.js";
 import ListItem from "./components/ListItem.js";
 
+//import { loadFromLocal, saveToLocal } from "./lib/localStorage.js";
+
 import "./App.css";
 
 export default function App() {
   //const [shoppingList, setshoppingList] = useState(loadFromLocal);
   const [items, setItems] = useState([]);
   const [data, setData] = useState([]);
+  const [matchingItems, setMatchingItems] = useState([]);
 
   useEffect(() => {
     async function loadItems() {
@@ -27,9 +30,27 @@ export default function App() {
     loadItems();
   }, []);
 
-  function handleonSearch(Item) {
-    setItems([data.filter((name) => name.toLowerCase() === Item)]);
+  /*useEffect(() => {
+    saveToLocal("items", shoppingList);
+  }, [shoppingList]);*/
+
+  function addMatchedItem(item) {
+    setItems([...items, item]);
   }
+
+  function filterItems(searchString) {
+    if (searchString.length > 1) {
+      setMatchingItems(
+        data.filter((item) =>
+          item.name.en.toLowerCase().includes(searchString.toLowerCase())
+        )
+      );
+    } else {
+      setMatchingItems([]);
+    }
+  }
+
+  console.log(matchingItems);
 
   function handleAddItem(name) {
     setItems([
@@ -43,8 +64,8 @@ export default function App() {
     ]);
   }
 
-  function handleonDelete(itemId) {
-    setItems(items.filter((filteredItem) => filteredItem._id !== itemId));
+  function handleDelete(item) {
+    setItems(items.filter((filteredItem) => filteredItem._id !== item._id));
   }
 
   return (
@@ -54,7 +75,7 @@ export default function App() {
         {items.map((item) => (
           <ListItem
             ariaLabel="click to delete Item"
-            onDelete={handleonDelete}
+            onDelete={handleDelete}
             key={item._id}
             item={item}
           />
@@ -62,7 +83,17 @@ export default function App() {
       </ul>
       <p className="list__info">-click item to delete-</p>
       <hr className="list__divider"></hr>
-      <AddItem onSearch={handleonSearch} onAddItem={handleAddItem} />
+      <AddItem onInput={filterItems} onAddItem={handleAddItem} />
+      <ul role="list" className="ApiList">
+        {matchingItems.map((item) => (
+          <ListItem
+            ariaLabel="click to add Item from database"
+            onClick={() => addMatchedItem(item)}
+            key={item._id}
+            item={item}
+          />
+        ))}
+      </ul>
     </main>
   );
 }
