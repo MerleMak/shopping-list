@@ -1,16 +1,27 @@
 import "./AddItem.css";
 import { useState } from "react";
 
-export default function AddItem({ onAddItem }) {
+export default function AddItem({ onSearch, onAddItem }) {
   const [name, setName] = useState("");
+
+  function handleSearch(event) {
+    event.preventDefault();
+    onSearch(name);
+    setName("");
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
     onAddItem(name);
     setName("");
   }
+
   return (
-    <form className="AddItem__form" onSubmit={handleSubmit}>
+    <form
+      className="AddItem__form"
+      onChange={handleSearch}
+      onSubmit={handleSubmit}
+    >
       <label className="AddItem__label" htmlFor="new-item">
         What do you want to buy?
       </label>

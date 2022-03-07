@@ -1,14 +1,14 @@
 .list__body {
-  margin: 30px;
+  margin: 25px;
   padding: 30px;
   color: #f3dfc1;
   background-color: #160f29;
-  height: 90vh;
+  height: 92vh;
 }
 
 .list__header {
   font-family: "Berkshire Swash", cursive;
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 30px;
 }
 

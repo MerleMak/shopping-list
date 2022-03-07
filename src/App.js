@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import { nanoid } from "nanoid";
-import { initialItems } from "./db.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import AddItem from "./components/AddItem.js";
 import ListItem from "./components/ListItem.js";
@@ -9,7 +8,28 @@ import ListItem from "./components/ListItem.js";
 import "./App.css";
 
 export default function App() {
-  const [items, setItems] = useState(initialItems);
+  //const [shoppingList, setshoppingList] = useState(loadFromLocal);
+  const [items, setItems] = useState([]);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function loadItems() {
+      try {
+        const response = await fetch(
+          "https://fetch-me.vercel.app/api/shopping/items"
+        );
+        const data = await response.json();
+        setData(data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    loadItems();
+  }, []);
+
+  function handleonSearch(Item) {
+    setItems([data.filter((name) => name.toLowerCase() === Item)]);
+  }
 
   function handleAddItem(name) {
     setItems([
@@ -42,7 +62,7 @@ export default function App() {
       </ul>
       <p className="list__info">-click item to delete-</p>
       <hr className="list__divider"></hr>
-      <AddItem onAddItem={handleAddItem} />
+      <AddItem onSearch={handleonSearch} onAddItem={handleAddItem} />
     </main>
   );
 }
