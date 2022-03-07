@@ -50,8 +50,6 @@ export default function App() {
     }
   }
 
-  console.log(matchingItems);
-
   function handleAddItem(name) {
     setItems([
       ...items,
@@ -75,7 +73,7 @@ export default function App() {
         {items.map((item) => (
           <ListItem
             ariaLabel="click to delete Item"
-            onDelete={handleDelete}
+            onClick={handleDelete}
             key={item._id}
             item={item}
           />
