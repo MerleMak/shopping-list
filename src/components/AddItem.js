@@ -27,6 +27,7 @@ export default function AddItem({ onInput, onAddItem }) {
         placeholder="Add item"
         value={name}
         onChange={handleChange}
+        autoComplete="off"
       />
       <button
         className="AddItem__button"
